@@ -9,7 +9,7 @@ A React + Vite starter for Agrosmart AI using Supabase as the backend and Netlif
 - Account states: `pending`, `approved`, `rejected`, `suspended`.
 - Roles: `farmer`, `agronomist`, `extension_officer`, `researcher`, `admin`, `super_admin`.
 - Admin dashboard to review accounts and approve, reject or suspend them.
-- Super Admin-only role assignment; regular Admin cannot assign privileged roles.
+- Super Admin-only role assignment; regular Admin cannot assign privileged roles. The in-app role assignment function cannot create another Super Admin; the platform owner provisions the initial Super Admin manually.
 - PostgreSQL Row Level Security (RLS) policies for profiles, farm records and private farm-media storage.
 - Basic farm record creation for approved users.
 - Netlify build configuration and SPA routing fallback.
@@ -19,13 +19,13 @@ A React + Vite starter for Agrosmart AI using Supabase as the backend and Netlif
 1. Sign in at <https://supabase.com/dashboard> and create a new project.
 2. Choose a strong database password and keep it in a password manager.
 3. Select a region suitable for your expected users and latency. You can start with a development project and move to a production project after testing.
-4. In **SQL Editor**, run the complete file `supabase/migrations/202611180001_phase1_core.sql`.
+4. In **SQL Editor**, run the complete file `supabase/migrations/202611180001_phase1_core.sql`. This migration creates the profile and farm tables, registration trigger, approval/role functions, RLS policies and private farm-media bucket.
 5. In **Authentication → URL Configuration**, set the Site URL to your Netlify site URL after Netlify has deployed. Add the Netlify deploy-preview URL patterns you intend to use under Redirect URLs.
 6. In **Authentication → Providers → Email**, configure email confirmation according to your launch policy. For public production registration, keep email confirmation enabled and configure reliable SMTP before launch.
 
 ## 2. Configure the frontend
 
-Copy `.env.example` to `.env` and set:
+A local `.env.local` file has been preconfigured for the Supabase project supplied in this conversation. For another environment, copy `.env.example` to `.env.local` and set:
 
 ```env
 VITE_SUPABASE_URL=https://YOUR_PROJECT_REF.supabase.co
